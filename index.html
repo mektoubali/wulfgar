@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر الفخامة | ساعات واكسسوارات</title>
+    <style>
+        /* إعادة ضبط الستايل الأساسي */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* القائمة العلوية */
+        header {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d4af37; /* لون ذهبي */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        .cart-icon {
+            background-color: #d4af37;
+            color: #1a1a1a;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* قسم الواجهة الرئيسية (Hero Section) */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000') center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #d4af37;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #d4af37;
+            color: #1a1a1a;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #b5922e;
+        }
+
+        /* قسم المنتجات */
+        .products-section {
+            padding: 50px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin: 15px 0 5px;
+        }
+
+        .product-price {
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* الفوتر */
+        footer {
+            background-color: #1a1a1a;
+            color: #888;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- القائمة العلوية -->
+    <header>
+        <div class="logo">متجر الفخامة</div>
+        <nav>
+            <a href="#home">الرئيسية</a>
+            <a href="#watches">الساعات</a>
+            <a href="#accessories">الاكسسوارات</a>
+        </nav>
+        <div class="cart-icon">السلة (<span id="cart-count">0</span>)</div>
+    </header>
+
+    <!-- واجهة الترحيب -->
+    <section class="hero" id="home">
+        <h1>أنقُص أوقاتك بالأناقة والتميّز</h1>
+        <p>تشكيلة فاخرة من الساعات والاكسسوارات العالمية</p>
+        <a href="#products" class="btn">تسوق الآن</a>
+    </section>
+
+    <!-- شبكة المنتجات -->
+    <section class="products-section" id="products">
+        <h2 class="section-title">أحدث المنتجات</h2>
+        
+        <div class="products-grid">
+            <!-- منتج 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=500" alt="ساعة كلاسيكية">
+                <h3 class="product-title">ساعة جلدية كلاسيكية</h3>
+                <p class="product-price">150 $</p>
+                <button class="btn" onclick="addToCart()">إضافة للسلة</button>
+            </div>
+
+            <!-- منتج 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=500" alt="سوار ذهبي">
+                <h3 class="product-title">سوار ذهبي أنيق</h3>
+                <p class="product-price">80 $</p>
+                <button class="btn" onclick="addToCart()">إضافة للسلة</button>
+            </div>
+
+            <!-- منتج 3 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=500" alt="ساعة رياضية">
+                <h3 class="product-title">ساعة ذكية رياضية</h3>
+                <p class="product-price">200 $</p>
+                <button class="btn" onclick="addToCart()">إضافة للسلة</button>
+            </div>
+
+            <!-- منتج 4 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1611591475285-a36adaf961e0?q=80&w=500" alt="خاتم فضة">
+                <h3 class="product-title">خاتم فضة عيار 925</h3>
+                <p class="product-price">60 $</p>
+                <button class="btn" onclick="addToCart()">إضافة للسلة</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <p>&copy; 2026 متجر الفخامة - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <!-- البرمجة التفاعلية -->
+    <script>
+        let cartCount = 0;
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            alert('تمت إضافة المنتج إلى السلة بنجاح!');
+        }
+    </script>
+</body>
+</html>
