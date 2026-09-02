@@ -3,234 +3,703 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر الفخامة | ساعات واكسسوارات</title>
+    <title>GoLab - منصة التعاون بين البراندات</title>
     <style>
-        /* إعادة ضبط الستايل الأساسي */
+        :root {
+            --bg-color: #030712;
+            --card-bg: rgba(15, 23, 42, 0.7);
+            --primary: #00f0ff;
+            --secondary: #7000ff;
+            --accent: #ff007b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(0, 240, 255, 0.2);
+            --glow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.1) 0%, transparent 40%);
         }
 
-        /* القائمة العلوية */
         header {
-            background-color: #1a1a1a;
-            color: #fff;
-            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #d4af37; /* لون ذهبي */
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
         }
 
         nav a {
-            color: #fff;
+            color: var(--text-muted);
             text-decoration: none;
-            margin-right: 20px;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #d4af37;
-        }
-
-        .cart-icon {
-            background-color: #d4af37;
-            color: #1a1a1a;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-weight: bold;
+            font-weight: 600;
+            transition: 0.3s;
             cursor: pointer;
         }
 
-        /* قسم الواجهة الرئيسية (Hero Section) */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000') center/cover;
-            height: 60vh;
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .actions {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: #d4af37;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            gap: 1rem;
         }
 
         .btn {
-            background-color: #d4af37;
-            color: #1a1a1a;
-            padding: 10px 25px;
-            border: none;
-            border-radius: 5px;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
+            transition: 0.3s;
+            border: none;
             text-decoration: none;
-            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .btn:hover {
-            background-color: #b5922e;
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: #fff;
+            box-shadow: var(--glow);
         }
 
-        /* قسم المنتجات */
-        .products-section {
-            padding: 50px 5%;
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        main {
+            padding: 3rem 5%;
+        }
+
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .search-filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .search-input, .filter-select {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.9rem 1.2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-input:focus, .filter-select:focus {
+            border-color: var(--primary);
+            box-shadow: var(--glow);
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .brand-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--glow);
+        }
+
+        .brand-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
+        }
+
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .brand-logo-placeholder {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .brand-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .brand-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .brand-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .how-it-works {
+            padding: 4rem 0;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 40px;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .step-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .step-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--glow);
             position: relative;
         }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
-        .product-card {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            text-align: center;
-            padding-bottom: 20px;
+        .close-modal:hover {
+            color: var(--primary);
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
-        .product-card img {
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
+            padding: 0.9rem 1.2rem;
+            background: rgba(3, 7, 18, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            outline: none;
+            transition: 0.3s;
         }
 
-        .product-title {
-            font-size: 1.2rem;
-            margin: 15px 0 5px;
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: var(--glow);
         }
 
-        .product-price {
-            color: #d4af37;
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
             font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
         }
 
-        /* الفوتر */
-        footer {
-            background-color: #1a1a1a;
-            color: #888;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .profile-header { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- القائمة العلوية -->
     <header>
-        <div class="logo">متجر الفخامة</div>
+        <div class="logo" onclick="switchView('home')">GoLab</div>
         <nav>
-            <a href="#home">الرئيسية</a>
-            <a href="#watches">الساعات</a>
-            <a href="#accessories">الاكسسوارات</a>
+            <ul>
+                <li><a onclick="switchView('home')" class="nav-link active" data-target="home">الرئيسية</a></li>
+                <li><a onclick="switchView('brands')" class="nav-link" data-target="brands">البراندات</a></li>
+                <li><a onclick="switchView('howitworks')" class="nav-link" data-target="howitworks">كيف يعمل؟</a></li>
+                <li><a onclick="switchView('profile')" class="nav-link" data-target="profile">بروفايلي</a></li>
+            </ul>
         </nav>
-        <div class="cart-icon">السلة (<span id="cart-count">0</span>)</div>
+        <div class="actions">
+            <button class="btn btn-outline" onclick="openModal('registerModal')">تسجيل براند</button>
+        </div>
     </header>
 
-    <!-- واجهة الترحيب -->
-    <section class="hero" id="home">
-        <h1>أنقُص أوقاتك بالأناقة والتميّز</h1>
-        <p>تشكيلة فاخرة من الساعات والاكسسوارات العالمية</p>
-        <a href="#products" class="btn">تسوق الآن</a>
-    </section>
-
-    <!-- شبكة المنتجات -->
-    <section class="products-section" id="products">
-        <h2 class="section-title">أحدث المنتجات</h2>
-        
-        <div class="products-grid">
-            <!-- منتج 1 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=500" alt="ساعة كلاسيكية">
-                <h3 class="product-title">ساعة جلدية كلاسيكية</h3>
-                <p class="product-price">150 $</p>
-                <button class="btn" onclick="addToCart()">إضافة للسلة</button>
+    <main>
+        <!-- Home View -->
+        <section id="home" class="view active">
+            <div class="hero">
+                <h1>منصة التعاون الأولى بين <span>البراندات الجزائرية والعالمية</span></h1>
+                <p>اكتشف شركاء جدد، وسّع نطاق عملك، وابنِ تحالفات تجارية قوية تعزز نمو علامتك التجارية في السوق المحلي والعالمي.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <button class="btn btn-primary" onclick="switchView('brands')">تصفح البراندات</button>
+                    <button class="btn btn-outline" onclick="openModal('registerModal')">سجل براندك الآن</button>
+                </div>
             </div>
 
-            <!-- منتج 2 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=500" alt="سوار ذهبي">
-                <h3 class="product-title">سوار ذهبي أنيق</h3>
-                <p class="product-price">80 $</p>
-                <button class="btn" onclick="addToCart()">إضافة للسلة</button>
+            <div class="how-it-works">
+                <h2 class="section-title">لماذا تختار <span>GoLab</span>؟</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <h3>شبكة واسعة</h3>
+                        <p>نجمع أفضل البراندات الناشئة والعالمية في مكان واحد لتسهيل التواصل والتعاون.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <h3>أمان وموثوقية</h3>
+                        <p>براندات موثقة ومعلومات دقيقة لضمان شراكات ناجحة ومثمرة للطرفين.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <h3>نمو مضاعف</h3>
+                        <p>وسّع قاعدة عملائك واطرح منتجات وخدمات مشتركة تحدث ضجة في السوق.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brands View -->
+        <section id="brands" class="view">
+            <h2 class="section-title" style="text-align: right; margin-bottom: 1.5rem;">استكشف <span>البراندات</span></h2>
+            <div class="search-filter-bar">
+                <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن براند بالاسم أو المجال..." oninput="filterBrands()">
+                <select id="categoryFilter" class="filter-select" onchange="filterBrands()">
+                    <option value="">جميع المجالات</option>
+                    <option value="تكنولوجيا">تكنولوجيا</option>
+                    <option value="موضة وأزياء">موضة وأزياء</option>
+                    <option value="أغذية ومشروبات">أغذية ومشروبات</option>
+                    <option value="تسويق وإعلان">تسويق وإعلان</option>
+                </select>
+                <select id="locationFilter" class="filter-select" onchange="filterBrands()">
+                    <option value="">جميع المناطق</option>
+                    <option value="الجزائر">الجزائر</option>
+                    <option value="عالمي">عالمي</option>
+                </select>
             </div>
 
-            <!-- منتج 3 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=500" alt="ساعة رياضية">
-                <h3 class="product-title">ساعة ذكية رياضية</h3>
-                <p class="product-price">200 $</p>
-                <button class="btn" onclick="addToCart()">إضافة للسلة</button>
+            <div class="brands-grid" id="brandsGrid">
+                <!-- Dynamic Content -->
             </div>
+        </section>
 
-            <!-- منتج 4 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1611591475285-a36adaf961e0?q=80&w=500" alt="خاتم فضة">
-                <h3 class="product-title">خاتم فضة عيار 925</h3>
-                <p class="product-price">60 $</p>
-                <button class="btn" onclick="addToCart()">إضافة للسلة</button>
+        <!-- How It Works View -->
+        <section id="howitworks" class="view">
+            <div class="how-it-works">
+                <h2 class="section-title">كيف تعمل <span>المنصة</span>؟</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>إنشاء البراند</h3>
+                        <p>قم بتسجيل علامتك التجارية وأضف تفاصيل نشاطك ومجال عملك وموقعك الجغرافي.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>البحث والاستكشاف</h3>
+                        <p>تصفح البراندات الأخرى وابحث عن الشريك المناسب لاستراتيجيتك التسويقية أو التجارية.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>إرسال طلب Collaboration</h3>
+                        <p>اضغط على زر التعاون وأرسل تفاصيل العرض والشراكة المقترحة بضغطة زر.</p>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <!-- Profile View -->
+        <section id="profile" class="view">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">DZ</div>
+                    <div>
+                        <h2>TechPulse DZ</h2>
+                        <p style="color: var(--text-muted); margin-top: 0.3rem;">تكنولوجيا وبرمجيات • الجزائر</p>
+                        <span class="brand-badge" style="position: static; display: inline-block; margin-top: 0.8rem;">نشط</span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1rem;">نبذة عن البراند</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">منصة جزائرية متخصصة في تطوير حلول الويب الذكية وربط الشركات الناشئة بالمستثمرين والمطورين عبر تقنيات المستقبل.</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 1rem;">طلبات التعاون الواردة والصادرة</h3>
+                    <div style="background: rgba(3, 7, 18, 0.4); border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; color: var(--text-muted); text-align: center;">
+                        لا توجد طلبات تعاون نشطة حالياً. ابدأ باستكشاف البراندات وأرسل أول طلب!
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Register Brand Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('registerModal')">&times;</button>
+            <h2 style="margin-bottom: 1.5rem;">تسجيل براند جديد</h2>
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>اسم البراند</label>
+                    <input type="text" id="regName" class="form-control" required placeholder="مثال: NovaWear">
+                </div>
+                <div class="form-group">
+                    <label>المجال</label>
+                    <select id="regCategory" class="form-control" required>
+                        <option value="تكنولوجيا">تكنولوجيا</option>
+                        <option value="موضة وأزياء">موضة وأزياء</option>
+                        <option value="أغذية ومشروبات">أغذية ومشروبات</option>
+                        <option value="تسويق وإعلان">تسويق وإعلان</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>الموقع الجغرافي</label>
+                    <select id="regLocation" class="form-control" required>
+                        <option value="الجزائر">الجزائر</option>
+                        <option value="عالمي">عالمي</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>وصف مختصر</label>
+                    <textarea id="regDesc" class="form-control" required placeholder="اكتب وصفاً موجزاً لما يقدمه البراند..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">إتمام التسجيل</button>
+            </form>
         </div>
-    </section>
+    </div>
 
-    <!-- الفوتر -->
-    <footer>
-        <p>&copy; 2026 متجر الفخامة - جميع الحقوق محفوظة</p>
-    </footer>
+    <!-- Collaboration Modal -->
+    <div id="collabModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('collabModal')">&times;</button>
+            <h2 style="margin-bottom: 0.5rem;">إرسال طلب Collaboration</h2>
+            <p id="collabTargetName" style="color: var(--primary); margin-bottom: 1.5rem; font-weight: bold;"></p>
+            <form onsubmit="handleCollab(event)">
+                <div class="form-group">
+                    <label>نوع التعاون المقترح</label>
+                    <input type="text" class="form-control" required placeholder="مثال: تسويق مشترك، منتج هجين...">
+                </div>
+                <div class="form-group">
+                    <label>رسالة العرض</label>
+                    <textarea class="form-control" required placeholder="اشرح لماذا ترغب في التعاون وكيف سيستفيد الطرفان..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال الطلب الآن</button>
+            </form>
+        </div>
+    </div>
 
-    <!-- البرمجة التفاعلية -->
     <script>
-        let cartCount = 0;
+        const initialBrands = [
+            { id: 1, name: 'Atlas AI', category: 'تكنولوجيا', location: 'الجزائر', desc: 'تطوير خوارزميات الذكاء الاصطناعي المخصصة للمؤسسات والشركات الناشئة.', badge: 'الجزائر' },
+            { id: 2, name: 'Sahara Threads', category: 'موضة وأزياء', location: 'الجزائر', desc: 'أزياء عصرية مستوحاة من التراث الصحراوي الجزائري برؤية مستقبلية.', badge: 'الجزائر' },
+            { id: 3, name: 'Global Brews', category: 'أغذية ومشروبات', location: 'عالمي', desc: 'سلسلة مقاهي عالمية تبحث عن شراكات محلية لتقديم تجارب استثنائية.', badge: 'عالمي' },
+            { id: 4, name: 'CyberPulse', category: 'تسويق وإعلان', location: 'عالمي', desc: 'وكالة تسويق رقمي تستخدم أحدث تقنيات الـ Web3 وتحليل البيانات.', badge: 'عالمي' },
+            { id: 5, name: 'Dzayer Tech', category: 'تكنولوجيا', location: 'الجزائر', desc: 'منصة تجمع المطورين والمستثمرين التقنيين في السوق المحلي.', badge: 'الجزائر' }
+        ];
 
-        function addToCart() {
-            cartCount++;
-            document.getElementById('cart-count').innerText = cartCount;
-            alert('تمت إضافة المنتج إلى السلة بنجاح!');
+        let brands = JSON.parse(localStorage.getItem('golab_brands')) || initialBrands;
+        let selectedBrandForCollab = '';
+
+        function switchView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            
+            document.querySelectorAll('.nav-link').forEach(l => {
+                l.classList.remove('active');
+                if(l.getAttribute('data-target') === viewId) l.classList.add('active');
+            });
+            window.scrollTo(0, 0);
         }
+
+        function renderBrands(data) {
+            const grid = document.getElementById('brandsGrid');
+            grid.innerHTML = '';
+            if(data.length === 0) {
+                grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 2rem;">لا توجد براندات تطابق بحثك.</p>';
+                return;
+            }
+            data.forEach(brand => {
+                const card = document.createElement('div');
+                card.className = 'brand-card';
+                card.innerHTML = `
+                    <span class="brand-badge">${brand.location}</span>
+                    <div>
+                        <div class="brand-header">
+                            <div class="brand-logo-placeholder">${brand.name.charAt(0)}</div>
+                            <div class="brand-info">
+                                <h3>${brand.name}</h3>
+                                <p>${brand.category}</p>
+                            </div>
+                        </div>
+                        <p class="brand-desc">${brand.desc}</p>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="openCollabModal('${brand.name}')">Collaboration</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterBrands() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            const location = document.getElementById('locationFilter').value;
+
+            const filtered = brands.filter(b => {
+                const matchesQuery = b.name.toLowerCase().includes(query) || b.desc.toLowerCase().includes(query);
+                const matchesCat = category === '' || b.category === category;
+                const matchesLoc = location === '' || b.location === location;
+                return matchesQuery && matchesCat && matchesLoc;
+            });
+            renderBrands(filtered);
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function openCollabModal(brandName) {
+            selectedBrandForCollab = brandName;
+            document.getElementById('collabTargetName').innerText = `إرسال طلب إلى: ${brandName}`;
+            openModal('collabModal');
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const newBrand = {
+                id: Date.now(),
+                name: document.getElementById('regName').value,
+                category: document.getElementById('regCategory').value,
+                location: document.getElementById('regLocation').value,
+                desc: document.getElementById('regDesc').value,
+                badge: document.getElementById('regLocation').value
+            };
+            brands.unshift(newBrand);
+            localStorage.setItem('golab_brands', JSON.stringify(brands));
+            closeModal('registerModal');
+            e.target.reset();
+            switchView('brands');
+            renderBrands(brands);
+        }
+
+        function handleCollab(e) {
+            e.preventDefault();
+            alert(`تم إرسال طلب الـ Collaboration بنجاح إلى البراند: ${selectedBrandForCollab}!`);
+            closeModal('collabModal');
+            e.target.reset();
+        }
+
+        window.onload = () => {
+            renderBrands(brands);
+        };
     </script>
 </body>
 </html>
