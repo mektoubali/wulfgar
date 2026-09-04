@@ -1,287 +1,165 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة جسر البراندات | DZ-Bridge</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Mounia Gauf | بيع القوفريط بالجملة ونصف الجملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
-        body { font-family: 'Cairo', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #d9534f;
+            font-size: 2rem;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-img {
+            background-color: #eee;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #222;
+        }
+        .card-text {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        .badge {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            background: #28a745;
+            color: white;
+            text-align: center;
+            padding: 0.75rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+        footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+<body>
 
-    <!-- شريط التنقل العلوي -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3 space-x-reverse">
-                <div class="bg-emerald-600 text-white p-2 rounded-xl font-bold text-xl">
-                    <i class="fa-solid fa-handshake"></i>
-                </div>
-                <span class="text-xl font-bold text-emerald-900">DZ-Bridge</span>
-            </div>
-            <nav class="hidden md:flex space-x-6 space-x-reverse font-semibold">
-                <button onclick="switchTab('home')" id="nav-home" class="text-emerald-600 transition">الرئيسية</button>
-                <button onclick="switchTab('brands')" id="nav-brands" class="text-gray-600 hover:text-emerald-600 transition">استعراض البراندات</button>
-                <button onclick="switchTab('collaborations')" id="nav-collaborations" class="text-gray-600 hover:text-emerald-600 transition">طلبات التعاون</button>
-                <button onclick="switchTab('admin')" id="nav-admin" class="text-red-600 hover:text-red-700 transition flex items-center gap-1"><i class="fa-solid fa-lock text-xs"></i> لوحة الأدمن</button>
-            </nav>
-            <div>
-                <button onclick="switchTab('collaborations')" class="bg-emerald-600 text-white px-5 py-2 rounded-xl font-semibold shadow hover:bg-emerald-700 transition">
-                    ابدأ شراكتك
-                </button>
-            </div>
-        </div>
+    <header>
+        <h1>Mounia Gauf</h1>
+        <p>الرفاهية والقرمشة الحقيقية - متوفر للبيع بالجملة ونصف الجملة للمحلات والموزعين</p>
     </header>
 
-    <!-- المحتوى الرئيسي -->
-    <main class="flex-grow container mx-auto px-6 py-8">
-
-        <!-- 1. الرئيسية -->
-        <section id="tab-home" class="page-section space-y-12">
-            <div class="bg-gradient-to-r from-emerald-800 to-teal-700 text-white rounded-3xl p-10 md:p-16 flex flex-col md:flex-row items-center justify-between shadow-xl">
-                <div class="md:w-1/2 space-y-6">
-                    <span class="bg-emerald-500/30 text-emerald-200 px-4 py-1.5 rounded-full text-sm font-semibold">بوابة البراندات الأولى في الجزائر</span>
-                    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">اجعل براندك الجزائري يصل إلى الأسواق العالمية</h1>
-                    <p class="text-emerald-100 text-lg">منصة رقمية موثوقة تجمع بين الشركات والمصممين الجزائريين ونظائرهم الدوليين لخلق شراكات استراتيجية.</p>
-                    <div class="flex space-x-4 space-x-reverse">
-                        <button onclick="switchTab('brands')" class="bg-white text-emerald-900 px-6 py-3 rounded-xl font-bold shadow hover:bg-emerald-50 transition">تصفح البراندات</button>
-                        <button onclick="switchTab('collaborations')" class="border-2 border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition">قدم طلب تعاون</button>
-                    </div>
+    <div class="container">
+        <h2 class="section-title">تشكيلة منتجاتنا</h2>
+        
+        <div class="products-grid">
+            <div class="card">
+                <div class="card-img">صورة Mounia Gauf شيكولا</div>
+                <div class="card-body">
+                    <span class="badge">جملة ونصف جملة</span>
+                    <h3 class="card-title">Mounia Gauf شوكولاتة</h3>
+                    <p class="card-text">علبة تحتوي على كمية ممتازة من قوفريط منيا بنكهة الشوكولاتة الغنية والمقرمشة.</p>
+                    <a href="https://wa.me/213000000000?text=أهلاً، أهتم بشراء Mounia Gauf شوكولاتة بالجملة" class="btn" target="_blank">اطلب عبر واتساب</a>
                 </div>
             </div>
-        </section>
 
-        <!-- 2. استعراض البراندات -->
-        <section id="tab-brands" class="page-section hidden space-y-8">
-            <div class="flex justify-between items-center flex-wrap gap-4">
-                <div>
-                    <h2 class="text-3xl font-bold text-emerald-900">دليل البراندات المسجلة</h2>
-                    <p class="text-gray-600">هنا تظهر البراندات المحفوظة تلقائياً في قاعدة البيانات.</p>
+            <div class="card">
+                <div class="card-img">صورة Mounia Gauf فانيليا</div>
+                <div class="card-body">
+                    <span class="badge">جملة ونصف جملة</span>
+                    <h3 class="card-title">Mounia Gauf فانيليا</h3>
+                    <p class="card-text">قرمشة خفيفة وطعم الفانيليا الأصلي، مثالية لأصحاب الأكیوس والمحلات التجارية.</p>
+                    <a href="https://wa.me/213000000000?text=أهلاً، أهتم بشراء Mounia Gauf فانيليا بالجملة" class="btn" target="_blank">اطلب عبر واتساب</a>
                 </div>
             </div>
-            <div id="brands-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- يتم تعبئتها ديناميكياً من قاعدة البيانات -->
-            </div>
-        </section>
 
-        <!-- 3. طلبات التعاون -->
-        <section id="tab-collaborations" class="page-section hidden max-w-2xl mx-auto bg-white p-8 rounded-3xl shadow-sm border space-y-6">
-            <div>
-                <h2 class="text-3xl font-bold text-emerald-900">إرسال طلب تعاون جديد</h2>
-                <p class="text-gray-600">سيتم حفظ طلبك وإرساله مباشرة للوحة تحكم المسؤول (الأدمن).</p>
-            </div>
-            <form onsubmit="handleCollabSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block font-semibold mb-1">اسم البراند أو الشركة</label>
-                    <input type="text" id="collab-brand" required class="w-full border rounded-xl px-4 py-2 focus:outline-none focus:border-emerald-600" placeholder="مثال: براند الأرزاق">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1">نوع الشراكة المطلوب</label>
-                    <select id="collab-type" class="w-full border rounded-xl px-4 py-2 focus:outline-none focus:border-emerald-600">
-                        <option>توزيع وتسويق مشترك</option>
-                        <option>إنتاج وتصنيع تبادلي</option>
-                        <option>حملة إعلانية مشتركة</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1">تفاصيل المقترح</label>
-                    <textarea id="collab-message" rows="4" required class="w-full border rounded-xl px-4 py-2 focus:outline-none focus:border-emerald-600" placeholder="اكتب تفاصيل الشراكة..."></textarea>
-                </div>
-                <button type="submit" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold shadow hover:bg-emerald-700 transition">إرسال الطلب وحفظه</button>
-            </form>
-        </section>
-
-        <!-- 4. لوحة تحكم الأدمن (Admin Panel) -->
-        <section id="tab-admin" class="page-section hidden max-w-4xl mx-auto space-y-6">
-            <!-- شاشة تسجيل الدخول للأدمن -->
-            <div id="admin-login-box" class="bg-white p-8 rounded-3xl shadow-sm border max-w-md mx-auto space-y-4">
-                <h2 class="text-2xl font-bold text-red-700 text-center"><i class="fa-solid fa-lock"></i> دخول لوحة الأدمن</h2>
-                <p class="text-sm text-gray-500 text-center">كلمة المرور الافتراضية للتجربة هي: <code>admin123</code></p>
-                <input type="password" id="admin-pass" placeholder="أدخل كلمة المرور" class="w-full border rounded-xl px-4 py-2 focus:outline-none focus:border-red-600">
-                <button onclick="checkAdminLogin()" class="w-full bg-red-600 text-white py-2 rounded-xl font-bold hover:bg-red-700 transition">تسجيل الدخول</button>
-            </div>
-
-            <!-- لوحة التحكم الفعلية (تظهر بعد الدخول) -->
-            <div id="admin-dashboard" class="hidden space-y-8">
-                <div class="bg-white p-6 rounded-3xl shadow-sm border flex justify-between items-center">
-                    <div>
-                        <h2 class="text-2xl font-bold text-red-800">لوحة تحكم المسؤول (Admin)</h2>
-                        <p class="text-gray-500 text-sm">إضافة براندات جديدة ومتابعة الطلبات المحفوظة.</p>
-                    </div>
-                    <button onclick="logoutAdmin()" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl font-semibold hover:bg-gray-200">تسجيل خروج</button>
-                </div>
-
-                <!-- نموذج إضافة براند جديد للقاعدة -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border space-y-4">
-                    <h3 class="font-bold text-xl text-emerald-900">إضافة براند جديد لقاعدة البيانات</h3>
-                    <form onsubmit="handleAddBrand(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="new-brand-name" placeholder="اسم البراند" required class="border rounded-xl px-4 py-2">
-                        <select id="new-brand-country" class="border rounded-xl px-4 py-2">
-                            <option value="جزائري">جزائري</option>
-                            <option value="دولي">دولي</option>
-                        </select>
-                        <input type="text" id="new-brand-desc" placeholder="وصف قصير للبراند" required class="border rounded-xl px-4 py-2 md:col-span-2">
-                        <button type="submit" class="md:col-span-2 bg-emerald-600 text-white py-2 rounded-xl font-bold hover:bg-emerald-700">حفظ البراند في القاعدة</button>
-                    </form>
-                </div>
-
-                <!-- جدول عرض طلبات التعاون الواردة -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border space-y-4">
-                    <h3 class="font-bold text-xl text-emerald-900">طلبات التعاون الواردة (<span id="collab-count">0</span>)</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-right border-collapse">
-                            <thead>
-                                <tr class="bg-gray-100 border-b">
-                                    <th class="p-3">البراند</th>
-                                    <th class="p-3">نوع الشراكة</th>
-                                    <th class="p-3">الرسالة</th>
-                                    <th class="p-3">إجراء</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-collab-table">
-                                <!-- تظهر الطلبات هنا ديناميكياً -->
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="card">
+                <div class="card-img">صورة Mounia Gauf موز / بنان</div>
+                <div class="card-body">
+                    <span class="badge">جملة ونصف جملة</span>
+                    <h3 class="card-title">Mounia Gauf بنكهة الموز</h3>
+                    <p class="card-text">المذاق المحبوب لدى الأطفال والكبار، متوفر بكميات كبرى لتجار الجملة بأسعار تنافسية.</p>
+                    <a href="https://wa.me/213000000000?text=أهلاً، أهتم بشراء Mounia Gauf بنكهة الموز بالجملة" class="btn" target="_blank">اطلب عبر واتساب</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
 
-    </main>
-
-    <!-- تذييل الصفحة -->
-    <footer class="bg-white border-t mt-12 py-6 text-center text-gray-500 text-sm">
-        <p>جميع الحقوق محفوظة © 2026 - منصة DZ-Bridge للتعاون بين البراندات</p>
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 Mounia Gauf | خدمة التوصيل متوفرة لمختلف ولايات الوطن</p>
     </footer>
 
-    <!-- سكريبت إدارة قاعدة البيانات (LocalStorage) والتنقل -->
-    <script>
-        // قاعدة البيانات الافتراضية الأولية إذا كانت فارغة
-        if (!localStorage.getItem('dz_brands')) {
-            const initialBrands = [
-                { name: 'أزياء الصحراء الحديثة', country: 'جزائري', desc: 'براند جزائري متخصص في دمج التراث التقليدي العصري.' },
-                { name: 'Lumière Cosmétiques', country: 'دولي', desc: 'علامة فرنسية لمستحضرات التجميل الطبيعية.' }
-            ];
-            localStorage.setItem('dz_brands', JSON.stringify(initialBrands));
-        }
-
-        if (!localStorage.getItem('dz_collabs')) {
-            localStorage.setItem('dz_collabs', JSON.stringify([]));
-        }
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
-            
-            if (tabId === 'brands') loadBrandsToUI();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // تحميل البراندات من قاعدة البيانات إلى الواجهة
-        function loadBrandsToUI() {
-            const brands = JSON.parse(localStorage.getItem('dz_brands')) || [];
-            const grid = document.getElementById('brands-grid');
-            grid.innerHTML = '';
-            
-            brands.forEach(b => {
-                grid.innerHTML += `
-                    <div class="bg-white rounded-2xl shadow-sm border p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div class="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-xl">${b.name.charAt(0)}</div>
-                            <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-semibold">${b.country}</span>
-                        </div>
-                        <h3 class="font-bold text-xl">${b.name}</h3>
-                        <p class="text-gray-600 text-sm">${b.desc}</p>
-                        <button onclick="switchTab('collaborations')" class="w-full bg-emerald-50 text-emerald-700 py-2 rounded-xl font-semibold hover:bg-emerald-100 transition">طلب تعاون</button>
-                    </div>
-                `;
-            });
-        }
-
-        // حفظ طلب تعاون جديد
-        function handleCollabSubmit(event) {
-            event.preventDefault();
-            const brand = document.getElementById('collab-brand').value;
-            const type = document.getElementById('collab-type').value;
-            const message = document.getElementById('collab-message').value;
-
-            const collabs = JSON.parse(localStorage.getItem('dz_collabs')) || [];
-            collabs.push({ brand, type, message });
-            localStorage.setItem('dz_collabs', JSON.stringify(collabs));
-
-            alert('تم إرسال طلب الشراكة وحفظه بنجاح في قاعدة البيانات!');
-            event.target.reset();
-            switchTab('home');
-        }
-
-        // التحقق من كلمة مرور الأدمن
-        function checkAdminLogin() {
-            const pass = document.getElementById('admin-pass').value;
-            if (pass === 'admin123') {
-                document.getElementById('admin-login-box').classList.add('hidden');
-                document.getElementById('admin-dashboard').classList.remove('hidden');
-                loadAdminData();
-            } else {
-                alert('كلمة المرور غير صحيحة! (جرب: admin123)');
-            }
-        }
-
-        function logoutAdmin() {
-            document.getElementById('admin-login-box').classList.remove('hidden');
-            document.getElementById('admin-dashboard').classList.add('hidden');
-            document.getElementById('admin-pass').value = '';
-        }
-
-        // إضافة براند جديد من لوحة الأدمن
-        function handleAddBrand(event) {
-            event.preventDefault();
-            const name = document.getElementById('new-brand-name').value;
-            const country = document.getElementById('new-brand-country').value;
-            const desc = document.getElementById('new-brand-desc').value;
-
-            const brands = JSON.parse(localStorage.getItem('dz_brands')) || [];
-            brands.push({ name, country, desc });
-            localStorage.setItem('dz_brands', JSON.stringify(brands));
-
-            alert('تمت إضافة البراند بنجاح للقاعدة!');
-            event.target.reset();
-            loadBrandsToUI();
-        }
-
-        // تحميل بيانات لوحة الأدمن (الطلبات)
-        function loadAdminData() {
-            const collabs = JSON.parse(localStorage.getItem('dz_collabs')) || [];
-            document.getElementById('collab-count').innerText = collabs.length;
-            const table = document.getElementById('admin-collab-table');
-            table.innerHTML = '';
-
-            if (collabs.length === 0) {
-                table.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500">لا توجد طلبات تعاون حتى الآن.</td></tr>`;
-                return;
-            }
-
-            collabs.forEach((c, index) => {
-                table.innerHTML += `
-                    <tr class="border-b">
-                        <td class="p-3 font-semibold">${c.brand}</td>
-                        <td class="p-3 text-sm">${c.type}</td>
-                        <td class="p-3 text-sm text-gray-600">${c.message}</td>
-                        <td class="p-3"><button onclick="deleteCollab(${index})" class="text-red-600 hover:text-red-800 text-sm font-bold">حذف</button></td>
-                    </tr>
-                `;
-            });
-        }
-
-        function deleteCollab(index) {
-            const collabs = JSON.parse(localStorage.getItem('dz_collabs')) || [];
-            collabs.splice(index, 1);
-            localStorage.setItem('dz_collabs', JSON.stringify(collabs));
-            loadAdminData();
-        }
-    </script>
 </body>
 </html>
