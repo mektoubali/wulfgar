@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mounia Gauf | بيع القوفريط بالجملة ونصف الجملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d9534f;
+            --primary-dark: #c9302c;
+            --accent: #ffc107;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #f8f9fa;
+            --card-bg: #1e1e1e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* شريط علوي ذكي */
+        .top-bar {
+            background: #1a1a1a;
+            color: white;
+            padding: 0.6rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .controls-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .c-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+        .btn-control {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .btn-control:hover {
+            opacity: 0.9;
+        }
+
+        /* الهيدر */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 1rem;
+        }
+
+        /* شريط البحث والتصفية الفوري */
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .stats-badge {
+            background: var(--card-bg);
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* شبكة المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .card-img {
+            background: linear-gradient(45deg, #e0e0e0, #f5f5f5);
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: 700;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #fff8e1;
+            color: #f57c00;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            align-self: flex-start;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .card-text {
+            color: #777;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            flex: 1;
+        }
+
+        .price-tag {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #25d366;
+            color: white;
+            text-align: center;
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1ebe5d;
+        }
+
+        /* لوحة التحكم الاحترافية */
+        #adminModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .admin-content {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 850px;
+            max-height: 90vh;
+            border-radius: 16px;
+            padding: 2.5rem;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.5rem;
+            background: #e0e0e0;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .btn-save {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table, th, td {
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: rgba(0,0,0,0.03);
+        }
+
+        .delete-btn {
+            background: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <!-- الشريط العلوي الذكي -->
+    <div class="top-bar">
+        <div class="controls-group">
+            <span>اختر لون الموقع:</span>
+            <div class="color-picker">
+                <div class="c-dot" style="background: #d9534f;" onclick="setTheme('#d9534f', '#c9302c')"></div>
+                <div class="c-dot" style="background: #007bff;" onclick="setTheme('#007bff', '#0056b3')"></div>
+                <div class="c-dot" style="background: #28a745;" onclick="setTheme('#28a745', '#1e7e34')"></div>
+                <div class="c-dot" style="background: #e83e8c;" onclick="setTheme('#e83e8c', '#c82373')"></div>
+            </div>
+            <button class="btn-control" onclick="toggleDarkMode()">🌓 الوضع الليلي/النهاري</button>
+        </div>
+        <div class="controls-group">
+            <button class="btn-control" style="background: #333;" onclick="openAdmin()">⚙️ لوحة تحكم الأدمن</button>
+        </div>
+    </div>
+
+    <!-- رأس الصفحة -->
+    <header>
+        <h1>Mounia Gauf</h1>
+        <p>الرفاهية والقرمشة الحقيقية - بيع القوفريط بالجملة ونصف الجملة للمحلات والموزعين</p>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container">
+        
+        <!-- شريط البحث والتصفية -->
+        <div class="filter-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="ابحث عن اسم القوفريط..." oninput="filterProducts()">
+            </div>
+            <div class="stats-badge" id="productCount">المنتجات المتوفرة: 0</div>
+        </div>
+
+        <!-- شبكة المنتجات -->
+        <div class="products-grid" id="productsGrid">
+            <!-- تعبئة تلقائية عبر الجافاسكربت -->
+        </div>
+
+    </div>
+
+    <!-- نافذة لوحة التحكم (Modal) -->
+    <div id="adminModal">
+        <div class="admin-content">
+            <button class="close-modal" onclick="closeAdmin()">✕</button>
+            <h2 style="color: var(--primary); margin-bottom: 1.5rem;">لوحة إدارة منتجات Mounia Gauf</h2>
+            
+            <form id="productForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>اسم المنتج (مثال: Mounia Gauf شوكولاتة)</label>
+                        <input type="text" id="pName" required placeholder="أدخل الاسم">
+                    </div>
+                    <div class="form-group">
+                        <label>السعر / تفاصيل الجملة</label>
+                        <input type="text" id="pPrice" required placeholder="متوفر جملة ونصف جملة">
+                    </div>
+                    <div class="form-group full">
+                        <label>وصف المنتج (الكمية والتعبئة)</label>
+                        <textarea id="pDesc" rows="3" required placeholder="أدخل التفاصيل..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn-save">➕ إضافة المنتج فوراً للموقع</button>
+            </form>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 0.5rem;">قائمة المنتجات الحالية</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الاسم</th>
+                            <th>الوصف</th>
+                            <th>التفاصيل</th>
+                            <th>حذف</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        <!-- تعبئة تلقائية -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 Mounia Gauf | الوجهة الأولى لتجار الجملة في الجزائر</p>
+    </footer>
+
+    <!-- الكود البرمجي الذكي (JavaScript) -->
+    <script>
+        let defaultProducts = [
+            { name: "Mounia Gauf شوكولاتة", desc: "علبة تحتوي على كمية ممتازة من قوفريط منيا بنكهة الشوكولاتة الغنية والمقرمشة.", price: "متوفر جملة ونصف جملة" },
+            { name: "Mounia Gauf فانيليا", desc: "قرمشة خفيفة وطعم الفانيليا الأصلي، مثالية لأصحاب الأكیوس والمحلات التجارية.", price: "متوفر جملة ونصف جملة" },
+            { name: "Mounia Gauf بنكهة الموز", desc: "المذاق المحبوب لدى الأطفال والكبار، متوفر بكميات كبرى لتجار الجملة بأسعار تنافسية.", price: "متوفر جملة ونصف جملة" }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('mouniaProducts_v2')) || defaultProducts;
+
+        // رسم وعرض المنتجات
+        function renderProducts(filteredList = products) {
+            const grid = document.getElementById('productsGrid');
+            const tbody = document.getElementById('adminTableBody');
+            const countBadge = document.getElementById('productCount');
+            
+            grid.innerHTML = '';
+            tbody.innerHTML = '';
+            countBadge.innerText = `المنتجات المتوفرة: ${filteredList.length}`;
+
+            if(filteredList.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 2rem; font-size: 1.2rem; color: #777;">عذراً، لم يتم العثور على منتج بهذا الاسم.</p>`;
+                return;
+            }
+
+            filteredList.forEach((product) => {
+                // البحث عن الفهرس الحقيقي للمنتج في القائمة الأصلية ليتم حذفه بدقة
+                const originalIndex = products.indexOf(product);
+
+                // عرض بطاقة المنتج للزبائن
+                grid.innerHTML += `
+                    <div class="card">
+                        <div class="card-img">Mounia Gauf</div>
+                        <div class="card-body">
+                            <span class="badge">جملة ونصف جملة</span>
+                            <h3 class="card-title">${product.name}</h3>
+                            <p class="card-text">${product.desc}</p>
+                            <div class="price-tag">${product.price}</div>
+                            <a href="https://wa.me/213000000000?text=أهلاً، أهتم بشراء ${encodeURIComponent(product.name)} بالجملة أو نصف جملة" class="btn-whatsapp" target="_blank">
+                                💬 اطلب عبر واتساب
+                            </a>
+                        </div>
+                    </div>
+                `;
+
+                // عرض صف في لوحة الأدمن
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${product.name}</strong></td>
+                        <td>${product.desc}</td>
+                        <td>${product.price}</td>
+                        <td><button class="delete-btn" onclick="deleteProduct(${originalIndex})">حذف</button></td>
+                    </tr>
+                `;
+            });
+
+            localStorage.setItem('mouniaProducts_v2', JSON.stringify(products));
+        }
+
+        // إضافة منتج جديد
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newProduct = {
+                name: document.getElementById('pName').value,
+                desc: document.getElementById('pDesc').value,
+                price: document.getElementById('pPrice').value
+            };
+            products.push(newProduct);
+            renderProducts();
+            this.reset();
+            alert('تم إضافة المنتج بنجاح إلى الموقع!');
+        });
+
+        // حذف منتج
+        function deleteProduct(index) {
+            if(confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) {
+                products.splice(index, 1);
+                renderProducts();
+            }
+        }
+
+        // محرك البحث الفوري
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        // فتح وإغلاق لوحة التحكم بنظام Modal الاحترافي
+        function openAdmin() {
+            document.getElementById('adminModal').style.display = 'flex';
+        }
+        function closeAdmin() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        // نظام تغيير الألوان
+        function setTheme(main, dark) {
+            document.documentElement.style.setProperty('--primary', main);
+            document.documentElement.style.setProperty('--primary-dark', dark);
+            localStorage.setItem('mouniaThemeMain', main);
+            localStorage.setItem('mouniaThemeDark', dark);
+        }
+
+        // نظام الوضع الليلي (Dark Mode)
+        function toggleDarkMode() {
+            const body = document.body;
+            if(body.getAttribute('data-theme') === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('mouniaMode', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('mouniaMode', 'light');
+            }
+        }
+
+        // التحميل الأولي واسترجاع تفضيلات المستخدم
+        window.onload = function() {
+            let savedMain = localStorage.getItem('mouniaThemeMain');
+            let savedDark = localStorage.getItem('mouniaThemeDark');
+            if(savedMain && savedDark) setTheme(savedMain, savedDark);
+
+            let savedMode = localStorage.getItem('mouniaMode');
+            if(savedMode) document.body.setAttribute('data-theme', savedMode);
+
+            renderProducts();
+        }
+    </script>
+</body>
+</html>
